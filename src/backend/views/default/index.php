@@ -11,7 +11,6 @@ use yii\grid\GridView;
 use yii\widgets\Pjax;
 
 $this->title = Yii::t('users', 'Users');
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row">
     <div class="col-md-12">

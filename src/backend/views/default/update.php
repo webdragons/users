@@ -10,7 +10,7 @@ use yii\helpers\Html;
  */
 
 $this->title = Yii::t('users', 'Update user: {name}', ['name' => $model->email]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('users', 'Users'), ['url' => ['index']]];
+
 $this->params['breadcrumbs'][] = $model->email;
 $this->params['breadcrumbs'][] = Yii::t('users', 'Update');
 ?>
