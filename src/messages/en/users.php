@@ -17,11 +17,13 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Active' => '',
     'Code name' => '',
     'Create' => '',
     'Create role' => '',
     'Create user' => '',
     'Data' => '',
+    'Deleted' => '',
     'Description' => '',
     'E-mail' => '',
     'Fill in the form below to register' => '',

@@ -17,8 +17,8 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'If you forget the password you can' => 'Если вы забыли пароль вы можете',
-    'restore it' => 'восстановить его',
+    'Active' => 'Активный',
+    'Deleted' => 'Удален',
     'Code name' => 'Кодовое название',
     'Create' => 'Создать',
     'Create role' => 'Добавить роль',
@@ -27,6 +27,7 @@ return [
     'Description' => 'Описание',
     'E-mail' => 'E-mail',
     'Fill in the form below to register' => 'Заполните форму ниже для того, чтобы зарегистрироваться',
+    'If you forget the password you can' => 'Если вы забыли пароль вы можете',
     'Incorrect username or password.' => 'Неверный email или пароль',
     'Log in' => 'Вход',
     'Login' => 'Вход',
@@ -54,4 +55,5 @@ return [
     'User successfully updated' => 'Пользователь успешно обновлен',
     'Users' => 'Пользователи',
     'Users list' => 'Список',
+    'restore it' => 'восстановить его',
 ];
