@@ -8,8 +8,8 @@ use yii\helpers\Html;
  * @var $permissions \yii\rbac\Permission[]
  */
 
-$this->title = 'Добавить роль';
-$this->params['breadcrumbs'][] = ['label' => 'Роли', 'url' => ['index']];
+$this->title = Yii::t('users', 'Create role');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('users', 'Roles'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row">

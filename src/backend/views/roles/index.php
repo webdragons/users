@@ -10,7 +10,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 
-$this->title = 'Роли';
+$this->title = Yii::t('users', 'Roles');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row">
@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <div class="panel-body">
                 <p>
-                    <?= Html::a('Добавить роль', ['create'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a(Yii::t('users', 'Create role'), ['create'], ['class' => 'btn btn-success']) ?>
                 </p>
 
                 <?php Pjax::begin(); ?>

@@ -2,6 +2,9 @@
 
 namespace bulldozer\users\backend\models;
 
+use Yii;
+use yii\db\ActiveQuery;
+
 /**
  * This is the model class for table "auth_item".
  *
@@ -25,7 +28,7 @@ class AuthItem extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public static function tableName()
+    public static function tableName() : string
     {
         return '{{%auth_item}}';
     }
@@ -33,7 +36,7 @@ class AuthItem extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules() : array
     {
         return [
             [['name', 'type'], 'required'],
@@ -45,49 +48,49 @@ class AuthItem extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getAuthAssignments()
+    public function getAuthAssignments() : ActiveQuery
     {
         return $this->hasMany(AuthAssignment::className(), ['item_name' => 'name']);
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getRuleName()
+    public function getRuleName() : ActiveQuery
     {
         return $this->hasOne(AuthRule::className(), ['name' => 'rule_name']);
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getAuthItemChildren()
+    public function getAuthItemChildren() : ActiveQuery
     {
         return $this->hasMany(AuthItemChild::className(), ['parent' => 'name']);
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getAuthItemChildren0()
+    public function getAuthItemChildren0() : ActiveQuery
     {
         return $this->hasMany(AuthItemChild::className(), ['child' => 'name']);
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getChildren()
+    public function getChildren() : ActiveQuery
     {
         return $this->hasMany(AuthItem::className(), ['name' => 'child'])->viaTable('auth_item_child', ['parent' => 'name']);
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getParents()
+    public function getParents() : ActiveQuery
     {
         return $this->hasMany(AuthItem::className(), ['name' => 'parent'])->viaTable('auth_item_child', ['child' => 'name']);
     }
@@ -95,16 +98,16 @@ class AuthItem extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
+    public function attributeLabels() : array
     {
         return [
-            'name' => 'Название',
-            'type' => 'Type',
-            'description' => 'Описание',
-            'rule_name' => 'Rule Name',
-            'data' => 'Data',
-            'created_at' => 'Дата создания',
-            'updated_at' => 'Дата удаления',
+            'name' => Yii::t('users', 'Name'),
+            'type' => Yii::t('users', 'Type'),
+            'description' => Yii::t('users', 'Description'),
+            'rule_name' => Yii::t('users', 'Rule name'),
+            'data' => Yii::t('users', 'Data'),
+            'created_at' => Yii::t('app', 'Created at'),
+            'updated_at' => Yii::t('app', 'Updated at'),
         ];
     }
 }

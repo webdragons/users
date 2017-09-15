@@ -8,10 +8,10 @@
 
 use yii\helpers\Html;
 
-$this->title = 'Редактирование роли: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Роли', 'url' => ['index']];
+$this->title = Yii::t('users', 'Update role: {name}', ['name' => $model->name]);
+$this->params['breadcrumbs'][] = ['label' => Yii::t('users', 'Roles'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->name]];
-$this->params['breadcrumbs'][] = 'Редактирование';
+$this->params['breadcrumbs'][] = Yii::t('users', 'Update');
 ?>
 <div class="row">
     <div class="col-md-12">
