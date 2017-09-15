@@ -3,6 +3,7 @@ namespace bulldozer\users\models;
 
 use bulldozer\users\enums\UserStatusEnum;
 use bulldozer\App;
+use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
@@ -27,7 +28,7 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @inheritdoc
      */
-    public static function tableName()
+    public static function tableName() : string
     {
         return '{{%users}}';
     }
@@ -35,7 +36,7 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @inheritdoc
      */
-    public function behaviors()
+    public function behaviors() : array
     {
         return [
             TimestampBehavior::className(),
@@ -45,7 +46,7 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules() : array
     {
         return [
             [['password_hash', 'password_reset_token', 'email', 'auth_key'], 'string'],
@@ -57,7 +58,10 @@ class User extends ActiveRecord implements IdentityInterface
         ];
     }
 
-    public function getStatusName()
+    /**
+     * @return string
+     */
+    public function getStatusName() : string
     {
         return UserStatusEnum::getLabel($this->status);
     }
@@ -65,7 +69,7 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @inheritdoc
      */
-    public static function findIdentity($id)
+    public static function findIdentity($id) : ?User
     {
         return static::findOne(['id' => $id, 'status' => UserStatusEnum::STATUS_ACTIVE]);
     }
@@ -84,7 +88,7 @@ class User extends ActiveRecord implements IdentityInterface
      * @param string $email
      * @return static|null
      */
-    public static function findByEmail($email)
+    public static function findByEmail(string $email) : ?User
     {
         return static::findOne(['email' => $email, 'status' => UserStatusEnum::STATUS_ACTIVE]);
     }
@@ -95,7 +99,7 @@ class User extends ActiveRecord implements IdentityInterface
      * @param string $token password reset token
      * @return static|null
      */
-    public static function findByPasswordResetToken($token)
+    public static function findByPasswordResetToken(string $token) : ?User
     {
         if (!static::isPasswordResetTokenValid($token)) {
             return null;
@@ -113,7 +117,7 @@ class User extends ActiveRecord implements IdentityInterface
      * @param string $token password reset token
      * @return bool
      */
-    public static function isPasswordResetTokenValid($token)
+    public static function isPasswordResetTokenValid(string $token) : bool
     {
         if (empty($token)) {
             return false;
@@ -127,7 +131,7 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @inheritdoc
      */
-    public function getId()
+    public function getId() : ?int
     {
         return $this->getPrimaryKey();
     }
@@ -135,7 +139,7 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @inheritdoc
      */
-    public function getAuthKey()
+    public function getAuthKey() : ?string
     {
         return $this->auth_key;
     }
@@ -143,7 +147,7 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @inheritdoc
      */
-    public function validateAuthKey($authKey)
+    public function validateAuthKey($authKey) : bool
     {
         return $this->getAuthKey() === $authKey;
     }
@@ -154,7 +158,7 @@ class User extends ActiveRecord implements IdentityInterface
      * @param string $password password to validate
      * @return bool if password provided is valid for current user
      */
-    public function validatePassword($password)
+    public function validatePassword(string $password) : bool
     {
         return App::$app->security->validatePassword($password, $this->password_hash);
     }
@@ -164,7 +168,7 @@ class User extends ActiveRecord implements IdentityInterface
      *
      * @param string $password
      */
-    public function setPassword($password)
+    public function setPassword(string $password) : void
     {
         $this->password_hash = App::$app->security->generatePasswordHash($password);
     }
@@ -172,7 +176,7 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * Generates "remember me" authentication key
      */
-    public function generateAuthKey()
+    public function generateAuthKey() : void
     {
         $this->auth_key = App::$app->security->generateRandomString();
     }
@@ -180,7 +184,7 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * Generates new password reset token
      */
-    public function generatePasswordResetToken()
+    public function generatePasswordResetToken() : void
     {
         $this->password_reset_token = App::$app->security->generateRandomString() . '_' . time();
     }
@@ -188,19 +192,21 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * Removes password reset token
      */
-    public function removePasswordResetToken()
+    public function removePasswordResetToken() : void
     {
         $this->password_reset_token = null;
     }
 
-    public function attributeLabels()
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels() : array
     {
         return [
-            'username' => 'Логин',
-            'email' => 'E-mail',
-            'statusName' => 'Статус',
-            'created_at' => 'Дата создания',
-            'updated_at' => 'Дата обновления',
+            'email' => Yii::t('users', 'E-mail'),
+            'statusName' => Yii::t('users', 'Status'),
+            'created_at' => Yii::t('app', 'Created at'),
+            'updated_at' => Yii::t('app', 'Updated at'),
         ];
     }
 }
