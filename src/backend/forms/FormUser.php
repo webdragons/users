@@ -80,7 +80,7 @@ class FormUser extends Form
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules() : array
     {
         return [
             ['email', 'trim'],
@@ -118,7 +118,7 @@ class FormUser extends Form
     /**
      * @return bool
      */
-    public function save()
+    public function save() : bool
     {
         $transaction = Yii::$app->db->beginTransaction();
 
@@ -161,7 +161,7 @@ class FormUser extends Form
     /**
      * @return array
      */
-    public function getSavedAttributes()
+    public function getSavedAttributes() : array
     {
         return [
             'email',
@@ -172,7 +172,7 @@ class FormUser extends Form
     /**
      * @return int
      */
-    public function getId()
+    public function getId() : ?int
     {
         return $this->user->id;
     }
@@ -180,14 +180,14 @@ class FormUser extends Form
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
+    public function attributeLabels() : array
     {
         return [
-            'email' => 'E-mail',
-            'password' => 'Пароль',
-            'roles' => 'Роли',
-            'permissions' => 'Разрешения',
-            'status' => 'Статус',
+            'email' => Yii::t('users', 'E-mail'),
+            'password' => Yii::t('users', 'Password'),
+            'roles' => Yii::t('users', 'Roles'),
+            'permissions' => Yii::t('users', 'Permissions'),
+            'status' => Yii::t('users', 'Status'),
         ];
     }
 }

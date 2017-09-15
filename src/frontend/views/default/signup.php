@@ -9,14 +9,14 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Регистрация';
+$this->title = Yii::t('users', 'Sign up');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container">
     <div class="site-signup">
         <h1><?= Html::encode($this->title) ?></h1>
 
-        <p>Заполните форму ниже для того, чтобы зарегистрироваться:</p>
+        <p><?= Yii::t('users', 'Fill in the form below to register') ?></p>
 
         <div class="row">
             <div class="col-lg-5">

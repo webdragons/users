@@ -9,14 +9,14 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Вход';
+$this->title = Yii::t('users', 'Login');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container">
     <div class="site-login">
         <h1><?= Html::encode($this->title) ?></h1>
 
-        <p>Пожалуйста введите логин и пароль:</p>
+        <p><?= Yii::t('users', 'Please enter login and password:') ?></p>
 
         <div class="row">
             <div class="col-lg-5">

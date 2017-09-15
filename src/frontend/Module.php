@@ -2,6 +2,7 @@
 
 namespace bulldozer\users\frontend;
 
+use bulldozer\App;
 use bulldozer\base\FrontendModule;
 
 class Module extends FrontendModule
@@ -15,6 +16,21 @@ class Module extends FrontendModule
      * @inheritdoc
      */
     public $controllerNamespace = 'bulldozer\users\frontend\controllers';
+
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        parent::init();
+
+        if (empty(App::$app->i18n->translations['users'])) {
+            App::$app->i18n->translations['users'] = [
+                'class' => 'yii\i18n\PhpMessageSource',
+                'basePath' => __DIR__ . '/../messages',
+            ];
+        }
+    }
 
     /*
      * @inheritdoc

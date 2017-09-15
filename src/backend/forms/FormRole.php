@@ -4,6 +4,7 @@ namespace bulldozer\users\backend\forms;
 
 use bulldozer\App;
 use bulldozer\users\rbac\Role;
+use Yii;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
 
@@ -134,10 +135,10 @@ class FormRole extends Model
     public function attributeLabels()
     {
         return [
-            'name' => 'Название',
-            'codename' => 'Кодовое имя',
-            'description' => 'Описание',
-            'permissions' => 'Разрешения',
+            'name' => Yii::t('users', 'Name'),
+            'codename' => Yii::t('users', 'Code name'),
+            'description' => Yii::t('users', 'Description'),
+            'permissions' => Yii::t('users', 'Permissions'),
         ];
     }
 }

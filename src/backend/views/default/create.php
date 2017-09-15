@@ -9,8 +9,8 @@ use yii\helpers\Html;
  * @var $permissions \yii\rbac\Permission
  */
 
-$this->title = 'Добавить пользователя';
-$this->params['breadcrumbs'][] = ['label' => 'Пользователи', 'url' => ['index']];
+$this->title = Yii::t('users', 'Create user');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('users', 'Users'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row">

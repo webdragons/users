@@ -8,6 +8,7 @@ use bulldozer\users\backend\search\UserSearch;
 use bulldozer\users\forms\LoginForm;
 use bulldozer\users\models\User;
 use bulldozer\web\Controller;
+use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\ForbiddenHttpException;
@@ -120,7 +121,7 @@ class DefaultController extends Controller
         $roles = $auth->getRoles();
 
         if ($model->load(App::$app->request->post()) && $model->save()) {
-            App::$app->getSession()->setFlash('success', 'Пользователь успешно добавлен');
+            App::$app->getSession()->setFlash('success', Yii::t('users', 'User successfully created'));
             return $this->redirect(['index']);
         } else {
             return $this->render('create', [
@@ -148,7 +149,7 @@ class DefaultController extends Controller
         $roles = $auth->getRoles();
 
         if ($model->load(App::$app->request->post()) && $model->save()) {
-            App::$app->getSession()->setFlash('success', 'Пользователь успешно обновлен');
+            App::$app->getSession()->setFlash('success', Yii::t('users', 'User successfully updated'));
             return $this->redirect(['index']);
         } else {
             return $this->render('update', [
@@ -168,7 +169,7 @@ class DefaultController extends Controller
     public function actionDelete(int $id)
     {
         $this->findModel($id)->delete();
-        App::$app->getSession()->setFlash('success', 'Пользователь успешно удален');
+        App::$app->getSession()->setFlash('success', Yii::t('users', 'User successfully deleted'));
 
         return $this->redirect(['index']);
     }
@@ -185,7 +186,7 @@ class DefaultController extends Controller
         if (($model = User::findOne($id)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
         }
     }
 }

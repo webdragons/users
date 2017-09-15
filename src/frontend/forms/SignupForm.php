@@ -2,6 +2,7 @@
 namespace bulldozer\users\frontend\forms;
 
 use bulldozer\users\models\User;
+use Yii;
 use yii\base\Model;
 
 /**
@@ -30,7 +31,7 @@ class SignupForm extends Model
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => User::class, 'message' => 'This email address has already been taken.'],
+            ['email', 'unique', 'targetClass' => User::class, 'message' => Yii::t('users', 'This email address has already been taken.')],
 
             ['password', 'required'],
             ['password', 'string', 'min' => 6],

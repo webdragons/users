@@ -9,10 +9,10 @@ use yii\helpers\Html;
  * @var $permissions \yii\rbac\Permission
  */
 
-$this->title = 'Редактирование пользователя: ' . $model->email;
-$this->params['breadcrumbs'][] = ['label' => 'Пользователи', 'url' => ['index']];
+$this->title = Yii::t('users', 'Update user: {name}', ['name' => $model->email]);
+$this->params['breadcrumbs'][] = ['label' => Yii::t('users', 'Users'), ['url' => ['index']]];
 $this->params['breadcrumbs'][] = $model->email;
-$this->params['breadcrumbs'][] = 'Редактирование';
+$this->params['breadcrumbs'][] = Yii::t('users', 'Update');
 ?>
 <div class="row">
     <div class="col-md-12">

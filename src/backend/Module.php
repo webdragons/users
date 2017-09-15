@@ -4,6 +4,7 @@ namespace bulldozer\users\backend;
 
 use bulldozer\App;
 use bulldozer\base\BackendModule;
+use Yii;
 
 class Module extends BackendModule
 {
@@ -17,6 +18,21 @@ class Module extends BackendModule
     /**
      * @inheritdoc
      */
+    public function init()
+    {
+        parent::init();
+
+        if (empty(App::$app->i18n->translations['users'])) {
+            App::$app->i18n->translations['users'] = [
+                'class' => 'yii\i18n\PhpMessageSource',
+                'basePath' => __DIR__ . '/../messages',
+            ];
+        }
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function getMenuItems(): array
     {
         $controllerId = isset(App::$app->controller) ? App::$app->controller->id : '';
@@ -24,18 +40,18 @@ class Module extends BackendModule
 
         return [
             [
-                'label' => 'Пользователи',
+                'label' => Yii::t('users', 'Users'),
                 'icon' => 'fa fa-users',
                 'child' => [
                     [
-                        'label' => 'Список',
+                        'label' => Yii::t('users', 'Users list'),
                         'icon' => 'fa fa-users',
                         'url' => ['/users'],
                         'rules' => ['users_manage'],
                         'active' => $moduleId == 'users' && $controllerId == 'default',
                     ],
                     [
-                        'label' => 'Роли',
+                        'label' => Yii::t('users', 'Roles'),
                         'icon' => 'fa fa-fire-extinguisher',
                         'url' => ['/users/roles'],
                         'rules' => ['roles_manage'],
@@ -71,7 +87,8 @@ class Module extends BackendModule
      */
     public function beforeAction($action)
     {
-        $action->controller->view->params['breadcrumbs'][] = ['label' => 'Пользователи', 'url' => ['/users']];
+        $action->controller->view->params['breadcrumbs'][] = ['label' => Yii::t('users', 'Users'), 'url' => ['/users']];
+
         return parent::beforeAction($action);
     }
 }

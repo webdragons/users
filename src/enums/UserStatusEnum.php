@@ -12,7 +12,12 @@ class UserStatusEnum extends BaseEnum
      * @var array
      */
     public static $list = [
-        self::STATUS_DELETED => 'Удален',
-        self::STATUS_ACTIVE => 'Активен',
+        self::STATUS_DELETED => 'Deleted',
+        self::STATUS_ACTIVE => 'Active',
     ];
+
+    /**
+     * @var string
+     */
+    public static $messageCategory = 'users';
 }

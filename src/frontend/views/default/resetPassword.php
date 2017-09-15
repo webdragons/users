@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="site-reset-password">
         <h1><?= Html::encode($this->title) ?></h1>
 
-        <p>Пожалуйста введите новый пароль:</p>
+        <p><?= Yii::t('users', 'Please enter new password') ?></p>
 
         <div class="row">
             <div class="col-lg-5">
@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= $form->field($model, 'password')->passwordInput(['autofocus' => true]) ?>
 
                     <div class="form-group">
-                        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>
+                        <?= Html::submitButton(Yii::t('users', 'Save'), ['class' => 'btn btn-primary']) ?>
                     </div>
                 <?php ActiveForm::end(); ?>
             </div>

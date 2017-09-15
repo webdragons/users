@@ -35,7 +35,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'permissions')->checkboxList(ArrayHelper::map($permissions, 'codename', 'name')) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Добавить' : 'Обновить',
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('users', 'Create')
+            : Yii::t('users', 'Update'),
             ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 

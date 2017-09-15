@@ -4,6 +4,7 @@ namespace bulldozer\users\forms;
 
 use bulldozer\App;
 use bulldozer\users\models\User;
+use Yii;
 use yii\base\Model;
 
 /**
@@ -60,7 +61,7 @@ class LoginForm extends Model
             $user = $this->getUser();
 
             if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
+                $this->addError($attribute, Yii::t('users', 'Incorrect username or password.'));
             }
         }
     }
@@ -99,9 +100,9 @@ class LoginForm extends Model
     public function attributeLabels()
     {
         return [
-            'email' => 'E-mail',
-            'password' => 'Пароль',
-            'rememberMe' => 'Запомнить меня',
+            'email' => Yii::t('users', 'E-mail'),
+            'password' => Yii::t('users', 'Password'),
+            'rememberMe' => Yii::t('users', 'Remember me'),
         ];
     }
 }
