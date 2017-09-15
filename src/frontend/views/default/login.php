@@ -29,11 +29,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= $form->field($model, 'rememberMe')->checkbox() ?>
 
                     <div style="color:#999;margin:1em 0">
-                        Если вы забыли пароль вы можете <?= Html::a('восстановить его', ['/users/request-password-reset']) ?>.
+                        <?= Yii::t('users', 'If you forget the password you can') ?>
+                        <?= Html::a(Yii::t('users', 'restore it'), ['/users/request-password-reset']) ?>.
                     </div>
 
                     <div class="form-group">
-                        <?= Html::submitButton('Войти', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                        <?= Html::submitButton(Yii::t('users', 'Log in'),
+                            ['class' => 'btn btn-primary', 'name' => 'login-button']
+                        ) ?>
                     </div>
 
                 <?php ActiveForm::end(); ?>

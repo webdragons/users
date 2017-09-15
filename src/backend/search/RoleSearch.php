@@ -14,7 +14,7 @@ class RoleSearch extends Role
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules() : array
     {
         return [
             [['name', 'description', 'rule_name', 'data'], 'safe'],
@@ -38,7 +38,7 @@ class RoleSearch extends Role
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params) : ActiveDataProvider
     {
         $query = Role::find();
 
