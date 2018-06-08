@@ -2,9 +2,13 @@
 
 namespace bulldozer\users\rbac;
 
-use yii\base\Object;
+use yii\base\BaseObject;
 
-class Item extends Object
+/**
+ * Class Item
+ * @package bulldozer\users\rbac
+ */
+class Item extends BaseObject
 {
     const TYPE_ROLE = 1;
     const TYPE_PERMISSION = 2;
