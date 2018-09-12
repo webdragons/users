@@ -21,7 +21,9 @@ use yii\web\IdentityInterface;
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password
- * @property string $statusName
+ * @property string $access_token
+
+ * @property-read string $statusName
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -39,7 +41,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function behaviors() : array
     {
         return [
-            TimestampBehavior::className(),
+            TimestampBehavior::class,
         ];
     }
 
@@ -49,7 +51,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules() : array
     {
         return [
-            [['password_hash', 'password_reset_token', 'email', 'auth_key'], 'string'],
+            [['password_hash', 'password_reset_token', 'email', 'auth_key', 'access_token'], 'string'],
 
             [['created_at', 'updated_at'], 'integer'],
 
@@ -79,7 +81,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
+        return static::findOne(['access_token' => $token, 'status' => UserStatusEnum::STATUS_ACTIVE]);
     }
 
     /**
@@ -167,6 +169,7 @@ class User extends ActiveRecord implements IdentityInterface
      * Generates password hash from password and sets it to the model
      *
      * @param string $password
+     * @throws \yii\base\Exception
      */
     public function setPassword(string $password) : void
     {
@@ -175,6 +178,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     /**
      * Generates "remember me" authentication key
+     * @throws \yii\base\Exception
      */
     public function generateAuthKey() : void
     {
@@ -182,7 +186,16 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
+     * @throws \yii\base\Exception
+     */
+    public function generateAccessToken(): void
+    {
+        $this->access_token = App::$app->security->generateRandomString();
+    }
+
+    /**
      * Generates new password reset token
+     * @throws \yii\base\Exception
      */
     public function generatePasswordResetToken() : void
     {

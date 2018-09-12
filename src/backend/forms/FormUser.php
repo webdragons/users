@@ -117,6 +117,8 @@ class FormUser extends Form
 
     /**
      * @return bool
+     * @throws \yii\base\Exception
+     * @throws \Exception
      */
     public function save() : bool
     {
@@ -128,6 +130,7 @@ class FormUser extends Form
             if (strlen($this->password) > 0) {
                 $this->user->setPassword($this->password);
                 $this->user->generateAuthKey();
+                $this->user->generateAccessToken();
             }
 
             if ($this->user->save()) {

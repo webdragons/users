@@ -20,7 +20,6 @@ class SignupForm extends Model
      */
     public $password;
 
-
     /**
      * @inheritdoc
      */
@@ -42,6 +41,7 @@ class SignupForm extends Model
      * Signs user up.
      *
      * @return User|null the saved model or null if saving fails
+     * @throws \yii\base\Exception
      */
     public function signup()
     {
@@ -53,6 +53,7 @@ class SignupForm extends Model
         $user->email = $this->email;
         $user->setPassword($this->password);
         $user->generateAuthKey();
+        $user->generateAccessToken();
 
         return $user->save() ? $user : null;
     }
